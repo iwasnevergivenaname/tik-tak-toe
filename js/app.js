@@ -34,7 +34,7 @@ let computer = {
 
 // callback function for the players move
 function doSomething(e) {
-  console.log("i'll figure out what goes here later");
+  console.log(`you just clicked ${e.target.id}`);
   if (e.target.id === "unit-one") {
     document.getElementById("unit-one").textContent = "○";
     player.currentMove = moves[0];
@@ -76,10 +76,17 @@ function doSomething(e) {
 function computerMoves () {
   let randomMove = Math.floor(Math.random() * moves.length);
   computer.currentMove = moves[randomMove]
+
+  // recording all of the computers moves to track if it wins
   let allMoves = [];
   allMoves.push(computer.currentMove);
   console.log(allMoves);
-  if (computer.currentMove === moves[0]) {
+
+  // not allowing the computer to pick a unit that has already been picked
+  if (computer.currentMove === player.currentMove) {
+   computerMoves();
+  // conditionals to place X
+  } else if (computer.currentMove === moves[0]) {
     document.getElementById("unit-one").textContent = "X";
     console.log("this is gonna mark unit one");
   } else if (computer.currentMove === moves[1]) {
