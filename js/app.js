@@ -27,13 +27,13 @@ unitNine.addEventListener("click", doSomething);
 
 
 
-// possible combinations to win
-// 1,2,3 - 4,5,6 - 7,8,9 - 1,4,7 - 2,5,8 - 3,6,9 - 1,5,9 - 7,5,3
+
 
 // function to check if user has won
-function userMoves() {
-  let playerMove = [];
+function userMoves(playerMove) {
 
+// possible combinations to win
+// 1,2,3 - 4,5,6 - 7,8,9 - 1,4,7 - 2,5,8 - 3,6,9 - 1,5,9 - 7,5,3
   if (playerMove === unitOne && unitTwo && unitThree) {
     console.log("you have won!");
   } else if (playerMove === unitFour && unitFive && unitSix) {
@@ -57,3 +57,9 @@ function userMoves() {
 
 
 }
+
+userMoves(unitThree, unitOne, unitEight, unitNine);
+
+// use % to count clicks and alternate between X and 0
+// add a submit form for user names
+// add a results div at bottom of page
