@@ -1,3 +1,41 @@
+/*general*/
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 h1 {
-  color: purple;
+
+}
+
+p {
+
+}
+
+/*gameboard*/
+.container-two {
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 305px;
+  margin: 0px auto;
+  border: solid 2px darkblue;
+}
+
+.grid-unit {
+  height: 100px;
+  width: 100px;
+  border: darkblue 1px solid;
+}
+
+.grid-column-one {
+  margin-left: -2px;
+}
+
+.grid-column-two {
+  margin: -307px 100px 0px 100px;
+}
+
+.grid-column-three {
+  margin: -307px 100px 0px 200px;
 }
