@@ -65,8 +65,10 @@ function doSomething(e) {
   } else {
     console.log("you didnt press the right button");
   }
+  setTimeout(function() {
+    computerMoves()
+  }, 2000);
 }
-
 
 
 
@@ -76,7 +78,7 @@ function computerMoves () {
   computer.currentMove = moves[randomMove]
   let allMoves = [];
   allMoves.push(computer.currentMove);
-  console.log("all moves");
+  console.log(allMoves);
   if (computer.currentMove === moves[0]) {
     document.getElementById("unit-one").textContent = "X";
     console.log("this is gonna mark unit one");
@@ -107,10 +109,7 @@ function computerMoves () {
   } else {
     console.log("this is not a box");
   }
-  // creating the visual move
 }
-
-computerMoves();
 
 
 // function to check if user has won
