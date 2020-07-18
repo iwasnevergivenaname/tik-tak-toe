@@ -20,22 +20,64 @@ unitSeven.addEventListener("click", doSomething);
 unitEight.addEventListener("click", doSomething);
 unitNine.addEventListener("click", doSomething);
 
+// array of possible moves
+const moves = [unitOne, unitTwo, unitThree, unitFour, unitFive, unitSix, unitSeven, unitEight, unitNine];
+
 // default choices are null
 let player = {
-  currentMove: null
+  currentMove: []
 };
 
 let computer = {
-  currentMove: null
+  currentMove: []
 };
+
+// callback function for the players move
+function doSomething(e) {
+  console.log("i'll figure out what goes here later");
+  if (e.target.id === "unit-one") {
+    document.getElementById("unit-one").textContent = "○";
+    player.currentMove = moves[0];
+  } else if (e.target.id === "unit-two") {
+    document.getElementById("unit-two").textContent = "○";
+    player.currentMove = moves[1];
+  } else if (e.target.id === "unit-three") {
+    document.getElementById("unit-three").textContent = "○";
+    player.currentMove = moves[2];
+  } else if (e.target.id === "unit-four") {
+    document.getElementById("unit-four").textContent = "○";
+    player.currentMove = moves[3];
+  } else if (e.target.id === "unit-five") {
+    document.getElementById("unit-five").textContent = "○";
+    player.currentMove = moves[4];
+  } else if (e.target.id === "unit-six") {
+    document.getElementById("unit-six").textContent = "○";
+    player.currentMove = moves[5];
+  } else if (e.target.id === "unit-seven") {
+    document.getElementById("unit-seven").textContent = "○";
+    player.currentMove = moves[6];
+  } else if (e.target.id === "unit-eight") {
+    document.getElementById("unit-eight").textContent = "○";
+    player.currentMove = moves[7];
+  } else if (e.target.id === "unit-nine") {
+    document.getElementById("unit-nine").textContent = "○";
+    player.currentMove = moves[8];
+  } else {
+    console.log("you didnt press the right button");
+  }
+}
+
+
+
 
 // function for computer to make choice
 function computerMoves () {
-  let moves = [unitOne, unitTwo, unitThree, unitFour, unitFive, unitSix, unitSeven, unitEight, unitNine];
   let randomMove = Math.floor(Math.random() * moves.length);
   computer.currentMove = moves[randomMove]
+  let allMoves = [];
+  allMoves.push(computer.currentMove);
+  console.log("all moves");
   if (computer.currentMove === moves[0]) {
-    // const computerMark = document.createElement("p");
     document.getElementById("unit-one").textContent = "X";
     console.log("this is gonna mark unit one");
   } else if (computer.currentMove === moves[1]) {
@@ -70,10 +112,6 @@ function computerMoves () {
 
 computerMoves();
 
-// callback function for onclick function
-function doSomething() {
-  console.log("i'll figure out what goes here later");
-}
 
 // function to check if user has won
 function userMoves(playerMove) {
