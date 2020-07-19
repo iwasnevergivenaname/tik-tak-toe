@@ -23,7 +23,7 @@ unitNine.addEventListener("click", doSomething);
 // array of possible moves
 const moves = [unitOne, unitTwo, unitThree, unitFour, unitFive, unitSix, unitSeven, unitEight, unitNine];
 
-// default choices are null
+// default choices are empty arrays
 let player = {
   currentMove: []
 };
@@ -85,9 +85,7 @@ function doSomething(e) {
   }
   setTimeout(function() {
     computerMoves();
-    // userMoves(player.currentMove); ???
-    whoWillWin(allPlayerMoves, allComputerMoves);
-
+    whoWillWin();
   }, 2000);
 }
 
@@ -98,8 +96,8 @@ function computerMoves () {
   computer.currentMove = moves[randomMove]
 
   // not allowing the computer to pick a unit that has already been picked
-  if (computer.currentMove === player.currentMove) {
-   computerMoves();
+  if (computer.currentMove === allPlayerMoves) {
+   console.log("i shornt be picking this");
   // conditionals to place X
   } else if (computer.currentMove === moves[0]) {
     document.getElementById("unit-one").textContent = "X";
@@ -151,71 +149,96 @@ function computerMoves () {
   }
 }
 
-// vairables to store every move made
+// variables to store every move made
 let allComputerMoves = [];
 let allPlayerMoves = [];
 
+whoWillWin();
 
 // function to check if user has won
-function whoWillWin(human, computer) {
-// possible combinations to win
-// 1,2,3 - 4,5,6 - 7,8,9 - 1,4,7 - 2,5,8 - 3,6,9 - 1,5,9 - 7,5,3
-  //checking if human won
-  if (human.includes("unit-one", "unit-two", "unit-three")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes( "unit-four", "unit-five", "unit-six")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes("unit-seven", "unit-eight", "unit-nine")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes("unit-one", "unit-four", "unit-seven")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes("uni-two", "unit-five", "unit-eight")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes("unit-three", "unit-six", "unit-nine")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes("unit-one", "unit-five", "unit-nine")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
-  } else if (human.includes("unit-seven", "unit-five", "unit-three")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("you have won!");
+function whoWillWin() {
+  let winningMoves = [["unit-one", "unit-two", "unit-three"],
+    ["unit-four", "unit-five", "unit-six"],
+    ["unit-seven", "unit-eight", "unit-nine"],
+    ["unit-one", "unit-four", "unit-seven"],
+    ["uni-two", "unit-five", "unit-eight"],
+    ["unit-three", "unit-six", "unit-nine"],
+    ["unit-one", "unit-five", "unit-nine"],
+    ["unit-seven", "unit-five", "unit-three"]];
 
-    // checking if computer won
-  } else if (computer.includes("unit-one", "unit-two", "unit-three")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("unit-four", "unit-five", "unit-six")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("unit-seven", "unit-eight", "unit-nine")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("unit-one", "unit-four", "unit-seven")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("uni-two", "unit-five", "unit-eight")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("unit-three", "unit-six", "unit-nine")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("unit-one", "unit-five", "unit-nine")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else if (computer.includes("unit-seven", "unit-five", "unit-three")) {
-    document.getElementById("results").textContent = "you won!"
-    console.log("computer has won!");
-  } else {
-    console.log("no one has won yet");
-  }
+  // let result = winningMoves.filter(allPlayerMoves.length);
+  // console.log(result + "here");
+  // return result;
 
 }
 
 
-// add a submit form for user names
+  // for (let i = 0; i < winningMoves.length; i++) {
+  //   console.log("winning moves ran");
+  //   for (let j = 0; j < allPlayerMoves.length; j++) {
+  //     if (winningMoves[i] === allPlayerMoves[j]) {
+  //       console.log("you won!")
+  //     }
+  //   }
+  // }
+  //
+  //
+
+
+// possible combinations to win
+// 1,2,3 - 4,5,6 - 7,8,9 - 1,4,7 - 2,5,8 - 3,6,9 - 1,5,9 - 7,5,3
+  //checking if human won
+  // if (human.includes("unit-one" && "unit-two" && "unit-three")) {
+  //   document.getElementById("results").textContent = "you won with 123!"
+  //   console.log("you have won!");
+  // } else if (human.includes( "unit-four" && "unit-five" && "unit-six")) {
+  //   document.getElementById("results").textContent = "you won with 456!"
+  //   console.log("you have won!");
+  // } else if (human.includes("unit-seven" && "unit-eight" && "unit-nine")) {
+  //   document.getElementById("results").textContent = "you won with 789!"
+  //   console.log("you have won!");
+  // } else if (human.includes("unit-one" && "unit-four" && "unit-seven")) {
+  //   document.getElementById("results").textContent = "you won with 147!"
+  //   console.log("you have won!");
+  // } else if (human.includes("uni-two" && "unit-five" && "unit-eight")) {
+  //   document.getElementById("results").textContent = "you won with 258!"
+  //   console.log("you have won!");
+  // } else if (human.includes("unit-three" && "unit-six" && "unit-nine")) {
+  //   document.getElementById("results").textContent = "you won! with 369"
+  //   console.log("you have won!");
+  // } else if (human.includes("unit-one" && "unit-five" && "unit-nine")) {
+  //   document.getElementById("results").textContent = "you won with 159!"
+  //   console.log("you have won!");
+  // } else if (human.includes("unit-seven" && "unit-five" && "unit-three")) {
+  //   document.getElementById("results").textContent = "you won with 753!"
+  //   console.log("you have won!");
+  //
+  //   // checking if computer won
+  // } else if (computer.includes("unit-one" && "unit-two" && "unit-three")) {
+  //   document.getElementById("results").textContent = "computer won with 123!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("unit-four" && "unit-five" && "unit-six")) {
+  //   document.getElementById("results").textContent = "computer won with 456!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("unit-seven" && "unit-eight" && "unit-nine")) {
+  //   document.getElementById("results").textContent = "computer won with 789!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("unit-one" && "unit-four" && "unit-seven")) {
+  //   document.getElementById("results").textContent = "computer won with 147!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("uni-two" && "unit-five" && "unit-eight")) {
+  //   document.getElementById("results").textContent = "computer won 258!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("unit-three" && "unit-six" && "unit-nine")) {
+  //   document.getElementById("results").textContent = "computer won with 369!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("unit-one" && "unit-five" && "unit-nine")) {
+  //   document.getElementById("results").textContent = "computer won with 159!"
+  //   console.log("computer has won!");
+  // } else if (computer.includes("unit-seven" && "unit-five" && "unit-three")) {
+  //   document.getElementById("results").textContent = "computer won with 753!"
+  //   console.log("computer has won!");
+  // } else {
+  //   console.log("no one has won yet");
+  // }
+
