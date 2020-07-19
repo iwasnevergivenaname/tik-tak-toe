@@ -38,38 +38,58 @@ function doSomething(e) {
   if (e.target.id === "unit-one") {
     document.getElementById("unit-one").textContent = "○";
     player.currentMove = moves[0];
+    allPlayerMoves.push("unit-one");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-two") {
     document.getElementById("unit-two").textContent = "○";
     player.currentMove = moves[1];
+    allPlayerMoves.push("unit-two");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-three") {
     document.getElementById("unit-three").textContent = "○";
     player.currentMove = moves[2];
+    allPlayerMoves.push("unit-three");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-four") {
     document.getElementById("unit-four").textContent = "○";
     player.currentMove = moves[3];
+    allPlayerMoves.push("unit-four");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-five") {
     document.getElementById("unit-five").textContent = "○";
     player.currentMove = moves[4];
+    allPlayerMoves.push("unit-five");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-six") {
     document.getElementById("unit-six").textContent = "○";
     player.currentMove = moves[5];
+    allPlayerMoves.push("unit-six");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-seven") {
     document.getElementById("unit-seven").textContent = "○";
     player.currentMove = moves[6];
+    allPlayerMoves.push("unit-seven");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-eight") {
     document.getElementById("unit-eight").textContent = "○";
     player.currentMove = moves[7];
+    allPlayerMoves.push("unit-eight");
+    console.log(allPlayerMoves);
   } else if (e.target.id === "unit-nine") {
     document.getElementById("unit-nine").textContent = "○";
     player.currentMove = moves[8];
+    allPlayerMoves.push("unit-nine");
+    console.log(allPlayerMoves);
   } else {
     console.log("you didnt press the right button");
   }
   setTimeout(function() {
-    computerMoves()
+    computerMoves();
+    // userMoves(player.currentMove); ???
+    whoWillWin(allPlayerMoves, allComputerMoves);
+
   }, 2000);
 }
-
 
 
 // function for computer to make choice
@@ -77,80 +97,125 @@ function computerMoves () {
   let randomMove = Math.floor(Math.random() * moves.length);
   computer.currentMove = moves[randomMove]
 
-  // recording all of the computers moves to track if it wins
-  let allMoves = [];
-  allMoves.push(computer.currentMove);
-  console.log(allMoves);
-
   // not allowing the computer to pick a unit that has already been picked
   if (computer.currentMove === player.currentMove) {
    computerMoves();
   // conditionals to place X
   } else if (computer.currentMove === moves[0]) {
     document.getElementById("unit-one").textContent = "X";
+    allComputerMoves.push("unit-one");
     console.log("this is gonna mark unit one");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[1]) {
     document.getElementById("unit-two").textContent = "X";
+    allComputerMoves.push("unit-two");
     console.log("this is gonna mark unit two");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[2]) {
     document.getElementById("unit-three").textContent = "X";
+    allComputerMoves.push("unit-three");
     console.log("this is gonna mark unit three");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[3]) {
     document.getElementById("unit-four").textContent = "X";
+    allComputerMoves.push("unit-four");
     console.log("this is gonna mark unit four");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[4]) {
     document.getElementById("unit-five").textContent = "X";
+    allComputerMoves.push("unit-five");
     console.log("this is gonna mark unit five");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[5]) {
     document.getElementById("unit-six").textContent ="X";
+    allComputerMoves.push("unit-six");
     console.log("this is gonna mark unit six");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[6]) {
     document.getElementById("unit-seven").textContent ="X";
+    allComputerMoves.push("unit-seven");
     console.log("this is gonna mark unit seven");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[7]) {
     document.getElementById("unit-eight").textContent = "X";
+    allComputerMoves.push("unit-eight");
     console.log("this is gonna mark unit eight");
+    console.log(allComputerMoves);
   } else if (computer.currentMove === moves[8]) {
     document.getElementById("unit-nine").textContent = "X";
+    allComputerMoves.push("unit-nine");
     console.log("this is gonna mark unit nine");
+    console.log(allComputerMoves);
   } else {
     console.log("this is not a box");
   }
 }
 
+// vairables to store every move made
+let allComputerMoves = [];
+let allPlayerMoves = [];
+
 
 // function to check if user has won
-function userMoves(playerMove) {
-
+function whoWillWin(human, computer) {
 // possible combinations to win
 // 1,2,3 - 4,5,6 - 7,8,9 - 1,4,7 - 2,5,8 - 3,6,9 - 1,5,9 - 7,5,3
-  if (playerMove === unitOne && unitTwo && unitThree) {
+  //checking if human won
+  if (human.includes("unit-one", "unit-two", "unit-three")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove === unitFour && unitFive && unitSix) {
+  } else if (human.includes( "unit-four", "unit-five", "unit-six")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove === unitSeven && unitEight && unitNine) {
+  } else if (human.includes("unit-seven", "unit-eight", "unit-nine")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove === unitOne && unitFour && unitSeven) {
+  } else if (human.includes("unit-one", "unit-four", "unit-seven")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove === unitTwo && unitFive && unitEight) {
+  } else if (human.includes("uni-two", "unit-five", "unit-eight")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove === unitThree && unitSix && unitNine) {
+  } else if (human.includes("unit-three", "unit-six", "unit-nine")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove ===  unitOne && unitFive && unitNine) {
+  } else if (human.includes("unit-one", "unit-five", "unit-nine")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
-  } else if (playerMove === unitSeven && unitFive && unitThree) {
+  } else if (human.includes("unit-seven", "unit-five", "unit-three")) {
+    document.getElementById("results").textContent = "you won!"
     console.log("you have won!");
+
+    // checking if computer won
+  } else if (computer.includes("unit-one", "unit-two", "unit-three")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("unit-four", "unit-five", "unit-six")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("unit-seven", "unit-eight", "unit-nine")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("unit-one", "unit-four", "unit-seven")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("uni-two", "unit-five", "unit-eight")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("unit-three", "unit-six", "unit-nine")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("unit-one", "unit-five", "unit-nine")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
+  } else if (computer.includes("unit-seven", "unit-five", "unit-three")) {
+    document.getElementById("results").textContent = "you won!"
+    console.log("computer has won!");
   } else {
-    console.log("you have lost :(");
+    console.log("no one has won yet");
   }
-
-
 
 }
 
-// userMoves(player.currentMove); ???
-userMoves(unitThree, unitOne, unitEight, unitNine);
 
-// use % to count clicks and alternate between X and 0
 // add a submit form for user names
-// add a results div at bottom of page
