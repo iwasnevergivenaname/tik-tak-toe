@@ -1,7 +1,7 @@
-// attaching js variables to the front end
-
+// isGameWon ends the game and ability to click the page when isGameWon results in true
 let isGameWon = false;
 
+// attaching js variables to the front end
 let zeroZero = document.getElementById("zero-zero");
 let oneZero = document.getElementById("one-zero");
 let twoZero = document.getElementById("two-zero");
@@ -29,7 +29,7 @@ function namingFunc() {
   document.getElementById("results").textContent = `${userName} is playing`
 }
 
-// two win you must hit these co-ords
+// to win you must hit one of these combinations
 function checkWinner(arr /*is guraunteed to be 3 x 3*/) {
   //diagonal win
   if (arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
@@ -64,19 +64,17 @@ function checkWinner(arr /*is guraunteed to be 3 x 3*/) {
   if (arr[0][2] == arr[1][2] && arr[1][2] == arr[2][2]) {
     return arr[0][2]
   }
-  // if (arr[0][0] == arr[1][1] && arr[1] == arr[2][2]) {return true;}
   return false;
 }
 
-// default choices are empty arrays
-let count = 0;
 // empty board for user and computer moves to occupy
 const theBoard = [
-  ['', '', ''],
-  ['', '', ''],
-  ['', '', '']
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""]
 ];
-const names = ['zero', 'one', 'two']
+// use to interpolate moves without storing each individual unit
+const names = ["zero", "one", "two"]
 
 // i is x
 // j is y
@@ -89,8 +87,9 @@ function redraw(board) {
   }
 }
 
-// function that plots player and computer move if it falls along the x and y axis
+
 function playMove(x, y, mark) {
+  // this checks if the move has been played already. any value other than 0 will result in a false and alert from theGame function
   if (theBoard[x][y].length !== 0) {
     return false;
   }
@@ -98,9 +97,10 @@ function playMove(x, y, mark) {
   return true;
 }
 
-// recursive function playValue returns eventlistener callback function
+// recursive function playValue returns eventListener callback function
 function playValue(x, y) {
-  return function doSomething(e) {
+  return function theGame(e) {
+    // if this condition is true, game ends
     if (isGameWon) {
       return;
     }
@@ -109,24 +109,26 @@ function playValue(x, y) {
       throw new Error("you're thinking too outside of the box");
     }
     // if result is true then the user played a valid move.
-    const result = playMove(x, y, '○');
+    const result = playMove(x, y, "○");
     if (result) {
+      // update board with move
       redraw(theBoard);
+      // check if that move won the game
       isGameWon = checkWinner(theBoard); // either returns a winner or false
       if (isGameWon) {
-        // prints name to result container
+        // prints name to results container
         let userName = document.getElementById("userName").value;
         document.getElementById("results").textContent = `WOW ${userName}, YOU WON!!!`
 
       } else {
-        // do nothing.
+        // do nothing, it's the computers move
         setTimeout(() => {
           computerMoves(theBoard);
         }, 1000)
       }
     } else {
-      // make player repeat move
-      alert("occupado");
+      // make player replay move
+      alert("ocupado");
     }
   };
 }
@@ -134,47 +136,11 @@ function playValue(x, y) {
 // function for computer to make choice
 // default x and y set randomly from params
 function computerMoves(theBoard, x = Math.floor(Math.random() * 3), y = Math.floor(Math.random() * 3)) {
-  if (!playMove(x, y, 'X')) {
+  // the computer is prompted to try again after a false
+  if (!playMove(x, y, "X")) {
     computerMoves(theBoard);
   }
+  // update board with computer move
   redraw(theBoard);
   return true;
 }
-
-// function to compare player moves with winning arrays
-// function compareArray(array1, array2) {
-//   if (array1.length !== array2.length) {
-//     return false;
-//   }
-//   for (let i = 0; i < array1.length; i++) {
-//     if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
-//       let result = compareArray(array1[i], array2[i]);
-//       if (!result) {
-//         return false;
-//       }
-//     } else if (array1[i] !== array2[i]) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
-
-
-//
-//
-// // players
-// const playerSigToName = {
-//   x: 'computer',
-//   o: 'salim'
-// }
-//
-// playerSigToName.o = 'salim';
-//
-// // print array and declare winner
-// print(array1);
-// const winner = check(array1);
-// if (!winner) {
-//   document.getElementById("results").textContent = "no winner yet";
-// } else {
-//   document.getElementById("results").textContent = `${playerSigToName[winner]}`;
-// }
