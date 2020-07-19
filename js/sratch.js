@@ -1,5 +1,7 @@
 // attaching js variables to the front end
-console.log(1);
+
+let isGameWon = false;
+
 let zeroZero = document.getElementById("zero-zero");
 let oneZero = document.getElementById("one-zero");
 let twoZero = document.getElementById("two-zero");
@@ -21,6 +23,11 @@ zeroTwo.addEventListener("click", playValue(0, 2));
 oneTwo.addEventListener("click", playValue(1, 2));
 twoTwo.addEventListener("click", playValue(2, 2));
 
+// grab user name from input
+function namingFunc() {
+  let userName = document.getElementById("userName").value;
+  document.getElementById("results").textContent = `${userName} is playing`
+}
 
 // two win you must hit these co-ords
 function checkWinner(arr /*is guraunteed to be 3 x 3*/) {
@@ -69,13 +76,14 @@ const theBoard = [
   ['', '', ''],
   ['', '', '']
 ];
-const names = ['zero', 'one','two']
+const names = ['zero', 'one', 'two']
 
 // i is x
 // j is y
 function redraw(board) {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
+      // placing moves on board
       document.getElementById(`${names[i]}-${names[j]}`).textContent = board[i][j];
     }
   }
@@ -93,6 +101,9 @@ function playMove(x, y, mark) {
 // recursive function playValue returns eventlistener callback function
 function playValue(x, y) {
   return function doSomething(e) {
+    if (isGameWon) {
+      return;
+    }
     // checking to make sure our input are within the confines of the board (3 * 3)
     if (x < 0 || y < 0 || x > 2 || y > 2) {
       throw new Error("you're thinking too outside of the box");
@@ -101,9 +112,12 @@ function playValue(x, y) {
     const result = playMove(x, y, '○');
     if (result) {
       redraw(theBoard);
-      const didYouWin = checkWinner(theBoard); // either returns a winner or false
-      if (didYouWin) {
-        // declare winner
+      isGameWon = checkWinner(theBoard); // either returns a winner or false
+      if (isGameWon) {
+        // prints name to result container
+        let userName = document.getElementById("userName").value;
+        document.getElementById("results").textContent = `WOW ${userName}, YOU WON!!!`
+
       } else {
         // do nothing.
         setTimeout(() => {
@@ -128,22 +142,22 @@ function computerMoves(theBoard, x = Math.floor(Math.random() * 3), y = Math.flo
 }
 
 // function to compare player moves with winning arrays
-function compareArray(array1, array2) {
-  if (array1.length !== array2.length) {
-    return false;
-  }
-  for (let i = 0; i < array1.length; i++) {
-    if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
-      let result = compareArray(array1[i], array2[i]);
-      if (!result) {
-        return false;
-      }
-    } else if (array1[i] !== array2[i]) {
-      return false;
-    }
-  }
-  return true;
-}
+// function compareArray(array1, array2) {
+//   if (array1.length !== array2.length) {
+//     return false;
+//   }
+//   for (let i = 0; i < array1.length; i++) {
+//     if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
+//       let result = compareArray(array1[i], array2[i]);
+//       if (!result) {
+//         return false;
+//       }
+//     } else if (array1[i] !== array2[i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 
 
 //

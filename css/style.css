@@ -38,11 +38,12 @@ p {
 }
 
 .grid-column-one {
+  margin-top: -1px;
   margin-left: -2px;
 }
 
 .grid-column-two {
-  margin: -307px 100px 0px 100px;
+  margin: -306px 100px 0px 100px;
 }
 
 .grid-column-three {
