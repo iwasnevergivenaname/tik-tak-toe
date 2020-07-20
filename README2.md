@@ -36,3 +36,6 @@ this game is based on a 3*3 grid and uses coordinates to plot player and compute
 
 this code stores the users move into an array which is then compared to an array of winning moves. 
 when a match between user/computer and winningCheck is found, the program will stop running and return a winner to the front end.
+
+## additional notes
+nothing needs to be installed or initialized to run.
