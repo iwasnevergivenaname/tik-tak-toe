@@ -1,4 +1,6 @@
 # tic-tac-toe
+|tic|tac|toe|
+|---|---|---|
 | x | o | x |
 | o | x | o |
 | x | o | x |
