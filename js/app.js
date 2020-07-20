@@ -47,37 +47,37 @@ function showPlayer(whoIsThePlayer) {
 // to win you must hit one of these combinations
 function checkWinner(arr /*has to be 3 x 3*/) {
   //diagonal win
-  if (arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
+  if (arr[0][0] === arr[1][1] && arr[1][1] === arr[2][2]) {
     return arr[0][0];
   }
-  if (arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0]) {
+  if (arr[0][2] === arr[1][1] && arr[1][1] === arr[2][0]) {
     return arr[0][2];
   }
 
   // first column win
-  if (arr[0][0] == arr[0][1] && arr[0][1] == arr[0][2]) {
-    return arr[0][0]
+  if (arr[0][0] === arr[0][1] && arr[0][1] === arr[0][2]) {
+    return arr[0][0];
   }
   // second column win
-  if (arr[1][0] == arr[1][1] && arr[1][1] == arr[1][2]) {
-    return arr[1][0]
+  if (arr[1][0] === arr[1][1] && arr[1][1] === arr[1][2]) {
+    return arr[1][0];
   }
   // third column win
-  if (arr[2][0] == arr[2][1] && arr[2][1] == arr[2][2]) {
-    return arr[2][0]
+  if (arr[2][0] === arr[2][1] && arr[2][1] === arr[2][2]) {
+    return arr[2][0];
   }
 
   // first row win
-  if (arr[0][0] == arr[1][0] && arr[1][0] == arr[2][0]) {
-    return arr[0][0]
+  if (arr[0][0] === arr[1][0] && arr[1][0] === arr[2][0]) {
+    return arr[0][0];
   }
   //second row win
-  if (arr[0][1] == arr[1][1] && arr[1][1] == arr[2][1]) {
-    return arr[0][1]
+  if (arr[0][1] === arr[1][1] && arr[1][1] === arr[2][1]) {
+    return arr[0][1];
   }
   // third row win
-  if (arr[0][2] == arr[1][2] && arr[1][2] == arr[2][2]) {
-    return arr[0][2]
+  if (arr[0][2] === arr[1][2] && arr[1][2] === arr[2][2]) {
+    return arr[0][2];
   }
   return false;
 }
@@ -132,9 +132,9 @@ function runCheckWinner(whoIsThePlayer, board) {
 
 // recursive function playValue returns eventListener callback function
 function playValue(x, y) {
-  return function theGame(e) {
+  return function theGame() {
     showPlayer("user");
-    let userName = document.getElementById("userName").value;
+    // let userName = document.getElementById("userName").value;
     // if this condition is true, game ends
     if (isGameWon) {
       return;
