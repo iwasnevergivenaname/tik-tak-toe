@@ -1,4 +1,11 @@
 # tic-tac-toe
+| x | o | x |
+|---|---|---|
+| o | x | o |
+|---|---|---|
+| x | o | x |
+
+
 ## why did i build this game?
 this game was built as an excerise in JavaScript, HTML, and CSS. 
 ## logic notes
