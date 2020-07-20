@@ -97,6 +97,24 @@ function playMove(x, y, mark) {
   return true;
 }
 
+// run checkWinner function after user and computer plays, then returns winner to results div when conditions are met
+function runCheckWinner(whoIsThePlayer, board) {
+  if (checkWinner(board)) {
+    isGameWon = true;
+    // user won
+    if (whoIsThePlayer === "user") {
+
+      let userName = document.getElementById("userName").value;
+      document.getElementById("results").textContent = `wowie ${userName}, you won :)`
+      return true;
+      // computer wins
+    } else if (whoIsThePlayer === "computer") {
+      document.getElementById("results").textContent = `the computer won :(`
+      return true;
+    }
+  }
+}
+
 // recursive function playValue returns eventListener callback function
 function playValue(x, y) {
   return function theGame(e) {
@@ -114,13 +132,8 @@ function playValue(x, y) {
       // update board with move
       redraw(theBoard);
       // check if that move won the game
-      isGameWon = checkWinner(theBoard); // either returns a winner or false
-      if (isGameWon) {
-        // prints name to results container
-        let userName = document.getElementById("userName").value;
-        document.getElementById("results").textContent = `wowie ${userName}, you won :)`
-
-      } else {
+      // isGameWon = checkWinner(theBoard); // either returns a winner or false
+      if (!runCheckWinner("user", theBoard)) {
         // do nothing, it's the computers move
         setTimeout(() => {
           computerMoves(theBoard);
@@ -135,12 +148,14 @@ function playValue(x, y) {
 
 // function for computer to make choice
 // default x and y set randomly from params
-function computerMoves(theBoard, x = Math.floor(Math.random() * 3), y = Math.floor(Math.random() * 3)) {
+function computerMoves(theBoard,
+                       x = Math.floor(Math.random() * 3),
+                       y = Math.floor(Math.random() * 3)) {
   // the computer is prompted to try again after a false
   if (!playMove(x, y, "x")) {
     computerMoves(theBoard);
   }
   // update board with computer move
   redraw(theBoard);
-  return true;
+  runCheckWinner("computer", theBoard);
 }
