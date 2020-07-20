@@ -23,20 +23,21 @@ zeroTwo.addEventListener("click", playValue(0, 2));
 oneTwo.addEventListener("click", playValue(1, 2));
 twoTwo.addEventListener("click", playValue(2, 2));
 
+
 // grab user name from input
 function namingFunc() {
   let userName = document.getElementById("userName").value;
-  document.getElementById("results").textContent = `${userName} is playing`
+  document.getElementById("results").textContent = `✧${userName}✧`;
 }
 
 // display who is playing
 function showPlayer(whoIsThePlayer) {
-  if (whoIsThePlayer === "user") {
-    console.log("user");
+  if (whoIsThePlayer === "computer") {
+    console.log("set to computer prints user");
     let userName = document.getElementById("userName").value;
     document.getElementById("user-display").textContent = `${userName} is playing`;
-  } else if (whoIsThePlayer === "computer") {
-    console.log("computer");
+  } else if (whoIsThePlayer === "user") {
+    console.log("set to user prints computer");
     document.getElementById("user-display").textContent = "computer is playing";
   } else {
     console.log("neither is playing");
@@ -119,11 +120,11 @@ function runCheckWinner(whoIsThePlayer, board) {
     // user won
     if (whoIsThePlayer === "user") {
       let userName = document.getElementById("userName").value;
-      document.getElementById("results").textContent = `wowie ${userName}, you won :)`
+      document.getElementById("results").textContent = `wowie ${userName}, you won :)`;
       return true;
       // computer wins
     } else if (whoIsThePlayer === "computer") {
-      document.getElementById("results").textContent = `the computer won :(`
+      document.getElementById("results").textContent = `the computer won :(`;
       return true;
     }
   }

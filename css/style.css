@@ -34,6 +34,10 @@ input, button {
   text-shadow: #4b0080 1px 1px;
 }
 
+#user-display {
+  text-align: center;
+}
+
 /*gameboard*/
 .container-two {
   flex-direction: column;
