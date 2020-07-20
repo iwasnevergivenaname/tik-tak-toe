@@ -29,6 +29,20 @@ function namingFunc() {
   document.getElementById("results").textContent = `${userName} is playing`
 }
 
+// display who is playing
+function showPlayer(whoIsThePlayer) {
+  if (whoIsThePlayer === "user") {
+    console.log("user");
+    let userName = document.getElementById("userName").value;
+    document.getElementById("user-display").textContent = `${userName} is playing`;
+  } else if (whoIsThePlayer === "computer") {
+    console.log("computer");
+    document.getElementById("user-display").textContent = "computer is playing";
+  } else {
+    console.log("neither is playing");
+  }
+}
+
 // to win you must hit one of these combinations
 function checkWinner(arr /*has to be 3 x 3*/) {
   //diagonal win
@@ -100,10 +114,10 @@ function playMove(x, y, mark) {
 // run checkWinner function after user and computer plays, then returns winner to results div when conditions are met
 function runCheckWinner(whoIsThePlayer, board) {
   if (checkWinner(board)) {
+    // changes value to true to trigger the game to stop
     isGameWon = true;
     // user won
     if (whoIsThePlayer === "user") {
-
       let userName = document.getElementById("userName").value;
       document.getElementById("results").textContent = `wowie ${userName}, you won :)`
       return true;
@@ -118,6 +132,8 @@ function runCheckWinner(whoIsThePlayer, board) {
 // recursive function playValue returns eventListener callback function
 function playValue(x, y) {
   return function theGame(e) {
+    showPlayer("user");
+    let userName = document.getElementById("userName").value;
     // if this condition is true, game ends
     if (isGameWon) {
       return;
@@ -137,6 +153,7 @@ function playValue(x, y) {
         // do nothing, it's the computers move
         setTimeout(() => {
           computerMoves(theBoard);
+          showPlayer("computer");
         }, 1000)
       }
     } else {
